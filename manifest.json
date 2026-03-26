@@ -2,9 +2,14 @@
   "manifest_version": 3,
   "name": "Shared Bookmarks Sync",
   "version": "1.0",
+  "description": "Manual sync bookmarks from GitHub JSON",
   "permissions": ["bookmarks"],
   "host_permissions": ["https://raw.githubusercontent.com/*"],
   "background": {
     "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Sync Bookmarks",
+    "default_popup": "popup.html"
   }
 }

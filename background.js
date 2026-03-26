@@ -1,4 +1,4 @@
-const BOOKMARK_URL = "https://raw.githubusercontent.com/your-username/repo-name/main/bookmarks.json";
+const BOOKMARK_URL = "https://raw.githubusercontent.com/shamimrana2006/auto-bookmark-sync/refs/heads/main/bookmarks.json";
 
 async function loadBookmarks() {
   try {
@@ -6,14 +6,15 @@ async function loadBookmarks() {
     const data = await res.json();
 
     chrome.bookmarks.getTree((tree) => {
-      const bar = tree[0].children.find(n => n.id === "1");
+      const bar = tree[0].children.find(node => node.id === "1");
+      if (!bar) return console.error("Bookmarks bar not found");
 
-      // পুরান bookmark delete
+      // Clear old bookmarks
       bar.children.forEach(child => {
         chrome.bookmarks.remove(child.id);
       });
 
-      // নতুন bookmark add
+      // Add new bookmarks
       data.forEach(item => {
         chrome.bookmarks.create({
           parentId: bar.id,
@@ -21,16 +22,18 @@ async function loadBookmarks() {
           url: item.url
         });
       });
-    });
 
-    console.log("✅ Bookmarks synced");
+      console.log("✅ Bookmarks synced successfully");
+    });
   } catch (err) {
-    console.error("❌ Error:", err);
+    console.error("❌ Error syncing bookmarks:", err);
   }
 }
 
-// install হলে run
-chrome.runtime.onInstalled.addListener(loadBookmarks);
-
-// প্রতি ১ মিনিটে auto update 🔥
-setInterval(loadBookmarks, 60000);
+// Listen to messages from popup
+chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
+  if (msg.action === "sync") {
+    loadBookmarks();
+    sendResponse({ status: "syncing" });
+  }
+});
