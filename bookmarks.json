@@ -1,4 +1,38 @@
 [
-  { "title": "Google", "url": "https://google.com" },
-  { "title": "YouTube", "url": "https://youtube.com" }
+  {
+    "title": "auto tred",
+    "url": "javascript:(async()=>{function delay(ms){return new Promise(r=>setTimeout(r,ms));}function setSliderValue(slider,value){const nativeSetter=Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype,\"value\").set;nativeSetter.call(slider,value);slider.dispatchEvent(new Event(\"input\",{bubbles:true}));const thumb=slider.parentElement.querySelector(\".bn-slider-track-thumb\");if(thumb)thumb.style.width=value+\"%\";}function realClick(element){element.dispatchEvent(new MouseEvent(\"mousedown\",{bubbles:true}));element.dispatchEvent(new MouseEvent(\"mouseup\",{bubbles:true}));element.dispatchEvent(new MouseEvent(\"click\",{bubbles:true}));}async function selectFirstToken(){const trigger=document.querySelector('.bn-textField-suffix .bn-tooltips-ele');if(!trigger)return console.log(\"❌ Dropdown trigger not found\");trigger.dispatchEvent(new MouseEvent(\"mouseover\",{bubbles:true}));await delay(500);const firstItem=document.querySelector('.trade-dropdown-item');if(firstItem){realClick(firstItem);console.log(\"✅ First token selected\");await delay(400);}else{console.log(\"❌ Dropdown item not found\");}}async function handlePopup(){await delay(200);const cancelBtn=document.querySelector(\".bn-modal-wrap .modal-footer .bn-button__secondary\");if(cancelBtn){console.log(\"⚠️ Popup detected! Clicking Cancel...\");realClick(cancelBtn);await delay(400);}}const totalActions=parseInt(prompt(\"Total actions (Buy/Sell alternately)?%22));if(!totalActions){alert(%22Invalid%20input!%22);return;}await selectFirstToken();for(let i=0;i<totalActions;i++){const isBuy=i%2===0;console.log(`🚀 Action ${i+1}: ${isBuy?\"Buy\":\"Sell\"}`);const slider=document.querySelectorAll(\".percent-slider .bn-slider\")[isBuy?0:1];const btn=document.querySelector(isBuy?\"#orderformBuyBtnV2\":\"#orderformSellBtnV2\");if(!slider||!btn){console.error(`${isBuy?\"Buy\":\"Sell\"} slider/button not found!`);return;}setSliderValue(slider,isBuy?100:100);await delay(400);realClick(btn);await handlePopup();console.log(`✅ ${isBuy?\"Buy\":\"Sell\"} executed`);await delay(400);}console.log(\"🎉 All actions completed!\");})();"
+  },
+  {
+    "title": "Overview - Wallet - Binance",
+    "url": "https://www.binance.com/en/my/wallet/account/overview"
+  },
+  {
+    "title": "Rewards Hub",
+    "url": "https://www.binance.com/en/rewards-hub"
+  },
+  {
+    "title": "C2C Send | Binance.com",
+    "url": "https://www.binance.com/en/my/wallet/account/payment/send"
+  },
+  {
+    "title": "trade history",
+    "url": "javascript:(function(){for(let i=0;i<5;i++){document.querySelectorAll(\".bn-button.bn-button__primary.data-size-tiny\")[i].click()}})();"
+  },
+  {
+    "title": "open all trade",
+    "url": "javascript:(function(){var j=prompt('JSON paste করুন:');if(!j)return;var d;try{d=JSON.parse(j)}catch(e){alert('Invalid JSON: '+e.message);return}var a=d.data||d;if(!Array.isArray(a)){alert('data array নেই');return}var tokens=[...new Set(a.map(function(x){return(x.baseAsset||'').toUpperCase()}).filter(Boolean))];var token='';if(tokens.length>1){token=(prompt('একাডিক token:\n'+tokens.join(', ')+'\n\nকোন token? (%খালিবা ভবল লিখলে সব)').toUpperCase())||''}else{token=tokens[0]}var f=token&&tokens.includes(token)?a.filter(function(x){return(x.baseAsset||'').toUpperCase()===token}):a;var isAll=!token||!tokens.includes(token);var lbl=isAll?'সব tokens ('+tokens.join(', ')+')':token+'/USDT';var t=0,b=0,s=0,bf=0,sf=0,bc=0,sc=0,ids=new Set();f.forEach(function(x){var v=parseFloat(x.usdtAmount)||0;var fee=parseFloat(x.fee)||0;var p=parseFloat(x.price)||0;t+=v;x.side==='BUY'?(b+=v,bc++,bf+=fee*p):(s+=v,sc++,sf+=fee);if(x.orderId)ids.add(x.orderId)});alert(lbl+'\n\nTRADE COUNT\nমোট: '+f.length+' | BUY: '+bc+' | SELL: '+sc+'\nমোট: $'+t.toFixed(2)+'\nBUY: $'+b.toFixed(2)+' | SELL: $'+s.toFixed(2)+'\n\nFEE\nমোট: $'+(bf+sf).toFixed(4)+'\nBUY fee: $'+bf.toFixed(4)+' | SELL fee: $'+sf.toFixed(4))})();"
+  },
+  {
+    "title": "Spot - Wallet - Binance",
+    "url": "https://www.binance.com/en/my/wallet/account/main"
+  },
+  {
+    "title": "C2C Receive | Binance.com",
+    "url": "https://www.binance.com/en/my/payment/receive"
+  },
+  {
+    "title": "USDT Deposit",
+    "url": "https://www.binance.com/en/my/wallet/account/main/deposit/crypto/USDT"
+  }
 ]
